@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节能减排绿色未来</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary: #1a936f;
+            --secondary: #88d498;
+            --light: #f3f9f7;
+            --dark: #114b5f;
+            --accent: #ff6b6b;
+            --gray: #6c757d;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            padding-bottom: 70px;
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        /* 公共样式 */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 15px 15px;
+            position: relative;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin: 10px 0 20px;
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 20px 15px 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin: 15px;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: var(--dark);
+            transform: scale(1.05);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+        }
+        
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+        
+        /* 首页样式 */
+        .carousel {
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 15px 20px;
+        }
+        
+        .carousel-slide {
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            padding: 0 20px;
+        }
+        
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+        
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            margin: 0 4px;
+        }
+        
+        .carousel-dot.active {
+            background: white;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 0 15px 25px;
+        }
+        
+        .feature-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        .feature-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .feature-item span {
+            font-size: 0.9rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .news-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 0 15px 20px;
+            scrollbar-width: none;
+        }
+        
+        .news-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .news-card {
+            display: inline-block;
+            width: 280px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            margin-right: 15px;
+            vertical-align: top;
+        }
+        
+        .news-img {
+            height: 120px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .news-content {
+            padding: 15px;
+        }
+        
+        .news-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        /* 节电指南页 */
+        .score-ring {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .score-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .score-label {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+        
+        .tips-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tip-item {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .tip-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .tip-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .tip-desc {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        /* 积分兑换页 */
+        .points-display {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .points-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .points-label {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+        
+        .category-tabs {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            padding: 0 15px;
+            scrollbar-width: none;
+        }
+        
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .category-tab {
+            padding: 8px 15px;
+            background: var(--light);
+            border-radius: 20px;
+            margin-right: 10px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 15px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .product-img {
+            height: 120px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .product-points {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* 每日打卡页面 */
+        .daily-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .share-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .streak-container {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .streak-count {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .streak-label {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 5px;
+            width: 80%;
+        }
+        
+        .question-container {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .question-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .option-item {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option-item:hover {
+            background: #e0f0ea;
+        }
+        
+        .option-item.selected {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .knowledge-point {
+            background: #e8f4f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .knowledge-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .contribution-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* 我的页面 */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .username {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .user-level {
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.2);
+            padding: 3px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .hero-ranking {
+            margin: 20px 15px;
+        }
+        
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .rank-badge {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .rank-1 {
+            background: #ffd700;
+        }
+        
+        .rank-2 {
+            background: #c0c0c0;
+        }
+        
+        .rank-3 {
+            background: #cd7f32;
+        }
+        
+        .friend-dynamic {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .dynamic-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dynamic-item:last-child {
+            border-bottom: none;
+        }
+        
+        .friend-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            overflow: hidden;
+        }
+        
+        .friend-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .dynamic-content {
+            flex: 1;
+        }
+        
+        .friend-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .dynamic-text {
+            font-size: 0.9rem;
+            margin: 5px 0;
+        }
+        
+        .dynamic-time {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .tree-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .tree-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .tree-level {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .tree-progress {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .badge-item {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 15px 10px;
+            text-align: center;
+        }
+        
+        .badge-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .badge-name {
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .achievement-item {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .achievement-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .map-container {
+            height: 200px;
+            background: var(--light);
+            border-radius: 12px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .windmill-progress {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .windmill-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 5px;
+            width: 35%;
+        }
+        
+        .windmill-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .windmill-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* 新闻速递页面 */
+        .news-page {
+            background: white;
+        }
+        
+        .search-container {
+            padding: 15px;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f5f7fa;
+            border-radius: 25px;
+            padding: 8px 15px;
+        }
+        
+        .search-box i {
+            color: var(--gray);
+            margin-right: 10px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 0.95rem;
+        }
+        
+        .news-categories {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 15px;
+            scrollbar-width: none;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .news-categories::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .category-item {
+            padding: 8px 15px;
+            background: #f5f7fa;
+            border-radius: 20px;
+            margin-right: 10px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-item.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .news-list {
+            padding: 15px;
+        }
+        
+        .news-item {
+            display: flex;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            background: white;
+        }
+        
+        .news-item-img {
+            width: 120px;
+            height: 100px;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .news-item-content {
+            flex: 1;
+            padding: 15px;
+        }
+        
+        .news-item-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+        
+        .news-item-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 10px;
+        }
+        
+        .news-item-category {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #e8f4f0;
+            color: var(--primary);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .hot-news {
+            border-left: 3px solid var(--accent);
+        }
+        
+        .important-news {
+            border-left: 3px solid #ffd700;
+        }
+        
+        /* 小风车贡献页地图 */
+        .china-map {
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1616763355548-1b606f439f86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .wind-turbine {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: url('https://cdn-icons-png.flaticon.com/512/2040/2040946.png') center/cover;
+            transform: translate(-50%, -50%);
+        }
+        
+        .wind-turbine::after {
+            content: attr(data-value);
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.8);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+        }
+        
+        .windmill-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            background: url('https://cdn-icons-png.flaticon.com/512/2040/2040946.png') center/cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 首页 -->
+        <div class="page active" id="home">
+            <div class="header">
+                <h1 class="page-title">节能减排 绿色未来</h1>
+                <div class="carousel">
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')">
+                        共建绿色地球 从你我做起
+                    </div>
+                    <div class="carousel-dots">
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot"></div>
+                        <div class="carousel-dot"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-item" data-page="guide">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>节电指南</span>
+                </div>
+                <div class="feature-item" data-page="shop">
+                    <i class="fas fa-gift"></i>
+                    <span>积分兑换</span>
+                </div>
+                <div class="feature-item" data-page="daily">
+                    <i class="fas fa-check-circle"></i>
+                    <span>每日打卡</span>
+                </div>
+                <div class="feature-item" data-page="contribution">
+                    <i class="fas fa-fan"></i>
+                    <span>小风车贡献</span>
+                </div>
+                <div class="feature-item" data-page="news">
+                    <i class="fas fa-newspaper"></i>
+                    <span>新闻速递</span>
+                </div>
+                <div class="feature-item" data-page="friends">
+                    <i class="fas fa-user-friends"></i>
+                    <span>好友互动</span>
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="fas fa-fire"></i> 节能新闻
+            </div>
+            
+            <div class="news-container">
+                <div class="news-card">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="news-content">
+                        <div class="news-title">智能电网助力城市节能减排新方案</div>
+                        <div class="news-meta">
+                            <span>2小时前</span>
+                            <span>家庭太</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1504813184591-01572f98c85f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="news-content">
+                        <div class="news-title">新能源发展新突破：风能发电效率提升30%</div>
+                        <div class="news-meta">
+                            <span>3小时前</span>
+                            <span>2.3万阅读</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1613665813446-82a78b468bcd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="news-content">
+                        <div class="news-title">绿色能源走进千家万户：智能电网建设进展</div>
+                        <div class="news-meta">
+                            <span>5小时前</span>
+                            <span>1.8万阅读</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 节电指南页 -->
+        <div class="page" id="guide">
+            <div class="header">
+                <h1 class="page-title">节电指南</h1>
+            </div>
+            
+            <div class="card">
+                <div class="score-ring">
+                    <canvas id="scoreChart" width="180" height="180"></canvas>
+                    <div class="score-value">83</div>
+                </div>
+                <div class="score-label">节电效率评分</div>
+                
+                <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.2rem; font-weight: 600; color: var(--primary);">83</div>
+                        <div style="font-size: 0.9rem; color: var(--gray);">个人平均</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.2rem; font-weight: 600; color: var(--dark);">75</div>
+                        <div style="font-size: 0.9rem; color: var(--gray);">全国平均</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="fas fa-tips"></i> 省电技巧
+            </div>
+            
+            <div class="tips-container">
+                <div class="tip-item">
+                    <div class="tip-icon"><i class="fas fa-plug"></i></div>
+                    <div class="tip-title">及时关闭待机设备</div>
+                    <div class="tip-desc">拔掉不用的电器插头，避免待机耗电</div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-icon"><i class="fas fa-power-off"></i></div>
+                    <div class="tip-title">使用节能模式</div>
+                    <div class="tip-desc">开启设备节能模式，自动调节功率</div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-icon"><i class="fas fa-thermometer-half"></i></div>
+                    <div class="tip-title">合理设置空调温度</div>
+                    <div class="tip-desc">夏季不低于26度，冬季不高于20度</div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <div class="tip-title">选用节能电器</div>
+                    <div class="tip-desc">购买能效标识为1-3级的节能产品</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 积分兑换页 -->
+        <div class="page" id="shop">
+            <div class="header">
+                <h1 class="page-title">积分商城</h1>
+            </div>
+            
+            <div class="points-display">
+                <div class="points-value">2,580</div>
+                <div class="points-label">当前积分</div>
+            </div>
+            
+            <div class="category-tabs">
+                <div class="category-tab active">全部</div>
+                <div class="category-tab">环保商品</div>
+                <div class="category-tab">数码产品</div>
+                <div class="category-tab">生活用品</div>
+                <div class="category-tab">节能设备</div>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://s1.imagehub.cc/images/2025/07/26/c537e869ff02728d1bdc066bfbc474e2.png')"></div>
+                    <div class="product-info">
+                        <div class="product-name">节能灯泡套装</div>
+                        <div class="product-points">500积分</div>
+                        <button class="btn btn-secondary" style="padding: 5px 15px; margin-top: 10px; width: 100%;">兑换</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://s1.imagehub.cc/images/2025/07/26/e3b38e07fb3751904cb2dfeae73f2091.png')"></div>
+                    <div class="product-info">
+                        <div class="product-name">智能插座</div>
+                        <div class="product-points">800积分</div>
+                        <button class="btn btn-secondary" style="padding: 5px 15px; margin-top: 10px; width: 100%;">兑换</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://s1.imagehub.cc/images/2025/07/26/31a8f417af2ccd00a2dcb5f2b2e54cb3.png')"></div>
+                    <div class="product-info">
+                        <div class="product-name">环保充电器</div>
+                        <div class="product-points">300积分</div>
+                        <button class="btn btn-secondary" style="padding: 5px 15px; margin-top: 10px; width: 100%;">兑换</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://s1.imagehub.cc/images/2025/07/26/9e76cb6f62c5fcc83172fed78bedb3cc.png')"></div>
+                    <div class="product-info">
+                        <div class="product-name">节能风扇</div>
+                        <div class="product-points">600积分</div>
+                        <button class="btn btn-secondary" style="padding: 5px 15px; margin-top: 10px; width: 100%;">兑换</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title" style="margin-top: 30px;">
+                <i class="fas fa-history"></i> 兑换记录
+            </div>
+            
+            <div class="card">
+                <div style="text-align: center; color: var(--gray); padding: 20px;">
+                    <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                    <div>暂无兑换记录</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 每日打卡页面 -->
+        <div class="page" id="daily">
+            <div class="header">
+                <div class="daily-header">
+                    <h1 class="page-title">每日环保打卡</h1>
+                    <button class="share-btn">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="streak-container">
+                    <div class="streak-count">15</div>
+                    <div class="streak-label">连续打卡天数</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div>再坚持5天可获得额外奖励</div>
+                </div>
+                
+                <div class="question-container">
+                    <div class="question-title">以下哪种行为最能节约用电？</div>
+                    <div class="option-item">及时关闭闲置电器</div>
+                    <div class="option-item selected">避免电器待机消耗</div>
+                    <div class="option-item">合理设置空调温度</div>
+                    <div class="option-item">使用节能电器产品</div>
+                    
+                    <div class="knowledge-point">
+                        <div class="knowledge-title">知识要点</div>
+                        <p>及时关闭闲置电器可以有效节约用电。据统计，一个待机的电视机每天会消耗约0.2度电。养成良好的用电习惯，对节能减排具有重要意义。</p>
+                    </div>
+                    
+                    <button class="btn" style="width: 100%; margin-top: 15px;">打卡完成</button>
+                </div>
+                
+                <div class="section-title" style="margin: 20px 0 10px;">
+                    <i class="fas fa-leaf"></i> 我的环保贡献
+                </div>
+                
+                <div class="contribution-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">8,756</div>
+                        <div class="stat-label">个人贡献值</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">8,756</div>
+                        <div class="stat-label">累计贡献</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">126</div>
+                        <div class="stat-label">等效植树</div>
+                    </div>
+                </div>
+                
+                <div class="section-title" style="margin: 20px 0 10px;">
+                    <i class="fas fa-chart-line"></i> 本月节电排名趋势
+                </div>
+                
+                <div style="height: 150px; background: #f8f9fa; border-radius: 10px; display: flex; align-items: flex-end; padding: 10px;">
+                    <div style="flex: 1; display: flex; justify-content: space-around; height: 100%;">
+                        <div style="width: 20px; height: 80%; background: var(--primary); border-radius: 5px 5px 0 0;"></div>
+                        <div style="width: 20px; height: 60%; background: var(--primary); border-radius: 5px 5px 0 0;"></div>
+                        <div style="width: 20px; height: 45%; background: var(--primary); border-radius: 5px 5px 0 0;"></div>
+                        <div style="width: 20px; height: 70%; background: var(--primary); border-radius: 5px 5px 0 0;"></div>
+                        <div style="width: 20px; height: 85%; background: var(--primary); border-radius: 5px 5px 0 0;"></div>
+                        <div style="width: 20px; height: 65%; background: var(--primary); border-radius: 5px 5px 0 0;"></div>
+                        <div style="width: 20px; height: 90%; background: var(--primary); border-radius: 5px 5px 0 0;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 我的页面（好友互动） -->
+        <div class="page" id="friends">
+            <div class="profile-header">
+                <div class="avatar">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="用户头像">
+                </div>
+                <div class="profile-info">
+                    <div class="username">节能小达人</div>
+                    <div class="user-level">环保达人</div>
+                </div>
+            </div>
+            
+            <div class="hero-ranking">
+                <div class="section-title">
+                    <i class="fas fa-crown"></i> 节电英雄榜
+                </div>
+                
+                <div class="ranking-item">
+                    <div class="rank-badge rank-1">1</div>
+                    <div>
+                        <div style="font-weight: 600;">环保达人</div>
+                        <div>234度</div>
+                    </div>
+                </div>
+                
+                <div class="ranking-item">
+                    <div class="rank-badge rank-2">2</div>
+                    <div>
+                        <div style="font-weight: 600;">节能专家</div>
+                        <div>198度</div>
+                    </div>
+                </div>
+                
+                <div class="ranking-item">
+                    <div class="rank-badge rank-3">3</div>
+                    <div>
+                        <div style="font-weight: 600;">绿色先锋</div>
+                        <div>189度</div>
+                    </div>
+                </div>
+                
+                <button class="btn" style="width: 100%; margin-top: 10px;">查看完整榜单</button>
+            </div>
+            
+            <div class="friend-dynamic">
+                <div class="section-title" style="margin: 0 0 15px;">
+                    <i class="fas fa-comments"></i> 好友动态
+                </div>
+                
+                <div class="dynamic-item">
+                    <div class="friend-avatar">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="小绿头像">
+                    </div>
+                    <div class="dynamic-content">
+                        <div class="friend-name">小绿</div>
+                        <div class="dynamic-text">完成了日常节电任务</div>
+                        <div class="dynamic-time">22分钟前</div>
+                    </div>
+                </div>
+                
+                <div class="dynamic-item">
+                    <div class="friend-avatar">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="环保达人头像">
+                    </div>
+                    <div class="dynamic-content">
+                        <div class="friend-name">环保达人</div>
+                        <div class="dynamic-text">获得了节能专家徽章</div>
+                        <div class="dynamic-time">15分钟前</div>
+                    </div>
+                </div>
+                
+                <div class="dynamic-item">
+                    <div class="friend-avatar">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="节能王头像">
+                    </div>
+                    <div class="dynamic-content">
+                        <div class="friend-name">节能王</div>
+                        <div class="dynamic-text">分享了节能小技巧</div>
+                        <div class="dynamic-time">5分钟前</div>
+                    </div>
+                </div>
+                
+                <button class="btn" style="width: 100%; margin-top: 10px;">
+                    <i class="fas fa-user-plus"></i> 添加好友
+                </button>
+            </div>
+            
+            <div class="card">
+                <div class="section-title" style="margin: 0 0 15px;">
+                    <i class="fas fa-trophy"></i> 我的成就
+                </div>
+                
+                <div class="achievement-grid">
+                    <div class="achievement-item">
+                        <div class="achievement-icon"><i class="fas fa-leaf"></i></div>
+                        <div>环保达人</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon"><i class="fas fa-bolt"></i></div>
+                        <div>节能先锋</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon"><i class="fas fa-tree"></i></div>
+                        <div>绿色生活</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon"><i class="fas fa-recycle"></i></div>
+                        <div>循环利用</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon"><i class="fas fa-sun"></i></div>
+                        <div>阳光使者</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon"><i class="fas fa-water"></i></div>
+                        <div>节水专家</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tree-container">
+                <div class="tree-icon">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <div class="tree-level">Level 3: 茁壮小树</div>
+                <div class="tree-progress">距离大树还差200度</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 65%;"></div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="section-title" style="margin: 0 0 15px;">
+                    <i class="fas fa-medal"></i> 徽章墙
+                </div>
+                
+                <div class="badges-grid">
+                    <div class="badge-item">
+                        <div class="badge-icon"><i class="fas fa-star"></i></div>
+                        <div class="badge-name">节能达人</div>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="badge-name">环保先锋</div>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon"><i class="fas fa-tint"></i></div>
+                        <div class="badge-name">节水专家</div>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon"><i class="fas fa-bolt"></i></div>
+                        <div class="badge-name">节电之星</div>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon"><i class="fas fa-recycle"></i></div>
+                        <div class="badge-name">循环大师</div>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon"><i class="fas fa-seedling"></i></div>
+                        <div class="badge-name">植树能手</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; display: flex; justify-content: space-between; background: #f8f9fa; padding: 15px; border-radius: 12px;">
+                    <div>
+                        <div>128.5度</div>
+                        <div style="font-size: 0.9rem; color: var(--gray);">总节电量</div>
+                    </div>
+                    <div>
+                        <div>15天</div>
+                        <div style="font-size: 0.9rem; color: var(--gray);">连续打卡</div>
+                    </div>
+                    <div>
+                        <div>28个</div>
+                        <div style="font-size: 0.9rem; color: var(--gray);">完成任务</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 15px; color: var(--primary);">
+                    节电量超过全国95%的用户
+                </div>
+            </div>
+        </div>
+        
+        <!-- 小风车贡献页 -->
+        <div class="page" id="contribution">
+            <div class="header">
+                <h1 class="page-title">小风车贡献</h1>
+            </div>
+            
+            <div class="card">
+                <div class="windmill-info">
+                    <div class="windmill-icon"></div>
+                    <div>已筹集小风车</div>
+                    <div class="windmill-value">357,892</div>
+                    <div>/ 1,000,000</div>
+                </div>
+                
+                <div class="windmill-progress">
+                    <div class="windmill-fill"></div>
+                </div>
+                
+                <div style="text-align: center; margin-bottom: 20px; color: var(--gray);">
+                    贡献度
+                </div>
+                
+                <div class="section-title">
+                    <i class="fas fa-map-marked-alt"></i> 全国贡献分布
+                </div>
+                
+                <div class="map-container">
+                    <div class="china-map">
+                        <div class="wind-turbine" style="top: 30%; left: 25%;" data-value="12,892"></div>
+                        <div class="wind-turbine" style="top: 35%; left: 45%;" data-value="10,567"></div>
+                        <div class="wind-turbine" style="top: 55%; left: 65%;" data-value="9,876"></div>
+                        <div class="wind-turbine" style="top: 40%; left: 70%;" data-value="8,432"></div>
+                        <div class="wind-turbine" style="top: 60%; left: 35%;" data-value="7,541"></div>
+                    </div>
+                </div>
+                
+                <div class="section-title">
+                    <i class="fas fa-trophy"></i> 贡献英雄榜 TOP100
+                </div>
+                
+                <div class="ranking-item">
+                    <div class="rank-badge rank-1">1</div>
+                    <div>
+                        <div style="font-weight: 600;">绿色先锋</div>
+                        <div>北京 · 12,892</div>
+                    </div>
+                </div>
+                
+                <div class="ranking-item">
+                    <div class="rank-badge rank-2">2</div>
+                    <div>
+                        <div style="font-weight: 600;">环保达人</div>
+                        <div>上海 · 10,567</div>
+                    </div>
+                </div>
+                
+                <div class="ranking-item">
+                    <div class="rank-badge rank-3">3</div>
+                    <div>
+                        <div style="font-weight: 600;">风能守护者</div>
+                        <div>广东 · 9,876</div>
+                    </div>
+                </div>
+                
+                <button class="btn" style="width: 100%; margin-top: 10px;">查看完整榜单</button>
+            </div>
+        </div>
+        
+        <!-- 新闻速递页面 -->
+        <div class="page" id="news">
+            <div class="header">
+                <h1 class="page-title">新闻速递</h1>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="搜索节能新闻...">
+                </div>
+            </div>
+            
+            <div class="news-categories">
+                <div class="category-item active">全部</div>
+                <div class="category-item">政策</div>
+                <div class="category-item">科普</div>
+                <div class="category-item">动态</div>
+                <div class="category-item">技术</div>
+                <div class="category-item">国际</div>
+            </div>
+            
+            <div class="news-list">
+                <!-- 重要公告 -->
+                <div class="news-item important-news">
+                    <div class="news-item-img" style="background-image: url('https://s1.imagehub.cc/images/2025/07/26/8591bd8440c364d42703c13f8d634f28.jpg')"></div>
+                    <div class="news-item-content">
+                        <div class="news-item-category">政策</div>
+                        <div class="news-item-title">重要公告：2024年绿色能源计划正式启动</div>
+                        <div class="news-item-meta">
+                            <span><i class="far fa-clock"></i> 今天</span>
+                            <span><i class="far fa-eye"></i> 3.5万</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 热点新闻 -->
+                <div class="news-item hot-news">
+                    <div class="news-item-img" style="background-image: url('https://s1.imagehub.cc/images/2025/07/26/71aa11d8e68484703205d794facf2b49.jpg')"></div>
+                    <div class="news-item-content">
+                        <div class="news-item-category">动态</div>
+                        <div class="news-item-title">新能源发展新突破：风能发电效率提升30%</div>
+                        <div class="news-item-meta">
+                            <span><i class="far fa-clock"></i> 2小时前</span>
+                            <span><i class="far fa-eye"></i> 2.3万</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 普通新闻 -->
+                <div class="news-item">
+                    <div class="news-item-img" style="background-image: url('https://s1.imagehub.cc/images/2025/07/26/2c8dd10832c8373ee01338bec32c6359.jpg')"></div>
+                    <div class="news-item-content">
+                        <div class="news-item-category">科普</div>
+                        <div class="news-item-title">家庭节能指南：10个简单方法节省电费</div>
+                        <div class="news-item-meta">
+                            <span><i class="far fa-clock"></i> 5小时前</span>
+                            <span><i class="far fa-eye"></i> 1.8万</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-img" style="background-image: url('https://s1.imagehub.cc/images/2025/07/26/bec80433a38b8e69b921d7ddc6c1a322.jpg')"></div>
+                    <div class="news-item-content">
+                        <div class="news-item-category">技术</div>
+                        <div class="news-item-title">智能电网助力城市节能减排新方案</div>
+                        <div class="news-item-meta">
+                            <span><i class="far fa-clock"></i> 昨天</span>
+                            <span><i class="far fa-eye"></i> 1.2万</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-img" style="background-image: url('https://s1.imagehub.cc/images/2025/07/26/8d79ce89d7941bf0e99a910b82114ca9.jpg')"></div>
+                    <div class="news-item-content">
+                        <div class="news-item-category">国际</div>
+                        <div class="news-item-title">全球可再生能源投资创历史新高</div>
+                        <div class="news-item-meta">
+                            <span><i class="far fa-clock"></i> 昨天</span>
+                            <span><i class="far fa-eye"></i> 9,876</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-img" style="background-image: url('https://s1.imagehub.cc/images/2025/07/26/6662b7cf3e4ed878201988412f62615e.jpeg')"></div>
+                    <div class="news-item-content">
+                        <div class="news-item-category">科普</div>
+                        <div class="news-item-title">太阳能电池板安装与维护完全指南</div>
+                        <div class="news-item-meta">
+                            <span><i class="far fa-clock"></i> 2天前</span>
+                            <span><i class="far fa-eye"></i> 8,543</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-img" style="background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="news-item-content">
+                        <div class="news-item-category">政策</div>
+                        <div class="news-item-title">国家发改委发布节能减排新补贴政策</div>
+                        <div class="news-item-meta">
+                            <span><i class="far fa-clock"></i> 3天前</span>
+                            <span><i class="far fa-eye"></i> 7,891</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-img" style="background-image: url('https://images.unsplash.com/photo-1504813184591-01572f98c85f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="news-item-content">
+                        <div class="news-item-category">动态</div>
+                        <div class="news-item-title">绿色能源走进千家万户：智能电网建设进展</div>
+                        <div class="news-item-meta">
+                            <span><i class="far fa-clock"></i> 3天前</span>
+                            <span><i class="far fa-eye"></i> 6,742</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 底部导航栏 -->
+        <div class="navbar">
+            <a href="#" class="nav-item active" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>首页</span>
+            </a>
+            <a href="#" class="nav-item" data-page="guide">
+                <i class="fas fa-lightbulb"></i>
+                <span>节电指南</span>
+            </a>
+            <a href="#" class="nav-item" data-page="shop">
+                <i class="fas fa-gift"></i>
+                <span>积分兑换</span>
+            </a>
+            <a href="#" class="nav-item" data-page="daily">
+                <i class="fas fa-check-circle"></i>
+                <span>每日打卡</span>
+            </a>
+            <a href="#" class="nav-item" data-page="friends">
+                <i class="fas fa-user"></i>
+                <span>我的</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 页面切换功能
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 移除所有活动状态
+                document.querySelectorAll('.nav-item').forEach(nav => {
+                    nav.classList.remove('active');
+                });
+                
+                // 隐藏所有页面
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // 添加当前活动状态
+                this.classList.add('active');
+                
+                // 显示对应页面
+                const pageId = this.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+                
+                // 滚动到顶部
+                window.scrollTo(0, 0);
+            });
+        });
+        
+        // 功能按钮点击事件
+        document.querySelectorAll('.feature-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const pageId = this.getAttribute('data-page');
+                
+                if(pageId) {
+                    // 移除所有活动状态
+                    document.querySelectorAll('.nav-item').forEach(nav => {
+                        nav.classList.remove('active');
+                    });
+                    
+                    // 隐藏所有页面
+                    document.querySelectorAll('.page').forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
+                    // 显示对应页面
+                    document.getElementById(pageId).classList.add('active');
+                    
+                    // 设置导航栏活动状态
+                    document.querySelector(`.nav-item[data-page="${pageId}"]`).classList.add('active');
+                    
+                    // 滚动到顶部
+                    window.scrollTo(0, 0);
+                }
+            });
+        });
+        
+        // 选项选择功能
+        document.querySelectorAll('.option-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.option-item').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+        });
+        
+        // 新闻分类选择
+        document.querySelectorAll('.category-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.category-item').forEach(cat => {
+                    cat.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // 初始化评分图表
+        window.onload = function() {
+            const ctx = document.getElementById('scoreChart');
+            if (ctx) {
+                new Chart(ctx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [83, 17],
+                            backgroundColor: ['#1a936f', '#e9ecef'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        cutout: '85%',
+                        responsive: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        }
+                    }
+                });
+            }
+        };
+    </script>
+</body>
+</html>
